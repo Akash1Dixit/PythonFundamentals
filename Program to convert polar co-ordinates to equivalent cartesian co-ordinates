@@ -1,0 +1,36 @@
+# Python 3 program for the above approach
+import math
+
+# Function to convert degree to radian
+def ConvertDegToRad(degree):
+	pi = 3.14159
+	return (degree * (pi / 180.0))
+
+# Function to convert the polar
+# coordinate to cartesian
+def ConvertToCartesian(polar):
+
+	# Convert degrees to radian
+	polar[1] = ConvertDegToRad(polar[1])
+
+	# Applying the formula:
+	# x = rcos(theta), y = rsin(theta)
+	cartesian = [polar[0] * math.cos(polar[1]),
+				polar[0] * math.sin(polar[1])]
+
+	# Print cartesian coordinates
+	print('%.3f' % cartesian[0],
+		'%.3f' % cartesian[1])
+
+# Driver Code
+if __name__ == "__main__":
+
+	# Given polar coordinates
+	polar = [1.4142, 45]
+
+	# Function to convert polar
+	# coordinates to equivalent
+	# cartesian coordinates
+	ConvertToCartesian(polar)
+
+
