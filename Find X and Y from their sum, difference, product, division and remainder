@@ -1,0 +1,124 @@
+# Python program for above approach
+import math
+
+# Function to check if X and Y
+# are valid or not
+def isValid(A, B, C, D, E) :
+	
+	# a represents 2*a for now
+	a = A + B
+
+	# 2a/2 = a that must be integer
+	if (math.ceil((a / 2.0)) != math.floor((a / 2.0))) :
+
+		ans = [0, 0]
+		return ans
+
+	else :
+
+		# Find value of a
+		a = a // 2
+
+		# Find value of b
+		b = A - a
+		res = [ 0, 0]
+		res1 = [ a, b ]
+		# Edge Cases
+		if (a == 0 or b == 0) :
+			return res
+		elif ((a + b) > pow(10, 3)
+			or (a - b) < pow(-10, 3)) :
+				return res
+
+		# 1st Condition, C = a*b
+		elif ((a * b == C) and (a // b == D)
+			and (a % b == E)
+			or (a * b == C) and (a // b == E)
+			and (a % b == D)) :
+			return res1
+
+		# 2nd Condition, D = a*b
+		elif ((a * b == D) and (a // b == C)
+			and (a % b == E)
+			or (a * b == D) and (a // b == E)
+			and (a % b == C)) :
+			return res1
+
+		# 3rd Condition, E = a*b
+		elif ((a * b == E) and (a // b == C)
+			and (a % b == D)
+			or (a * b == E) and (a // b == D)
+			and (a % b == C)) :
+			return res1
+
+		# Pairs are not valid then return 0
+		else :
+			return res
+
+# Function to find two integers X and Y
+def findNum(arr) :
+	
+	p = [0] * 2
+	flag = 0
+
+	for i in range(0, 5, 1) :
+
+		# Swapping for every
+		# X + Y combination
+		tmp = arr[0]
+		arr[0] = arr[i]
+		arr[i] = tmp
+		for j in range(1, 5, 1) :
+
+			# Swapping for every
+			# X - Y combination
+			tmp = arr[1]
+			arr[1] = arr[j]
+			arr[j] = tmp
+
+			# Checking for valid X and Y
+			p = isValid(arr[0], arr[1], arr[2], arr[3], arr[4])
+
+			# If both are not -1 then
+			# we found X and Y
+			if ((p[0] != 0) and (p[1] != 0)) :
+
+				# Set Flag = true
+				flag = 1
+
+				# Print the values in order
+				# i.e., X and Y
+				print(p[0], end = " ")
+				print(p[1])
+
+		# Backtracking
+		tmp = arr[1]
+		arr[1] = arr[j]
+		arr[j] = tmp
+
+		# X and Y are found
+		if (flag != 0) :
+			break
+		
+		# Backtracking
+		tmp = arr[0]
+		arr[0] = arr[j]
+		arr[i] = tmp
+
+		# X and Y are found
+		if (flag != 0) :
+			break
+
+	# If flag is 0 then X and Y
+	# can't be possible
+	if (flag == 0) :
+		print("0 0")
+
+# Driver code
+if __name__ == "__main__":
+	N = 5
+	arr = [ -1, 0, 4, 9, 20 ]
+
+	# Function call
+	findNum(arr)
+
