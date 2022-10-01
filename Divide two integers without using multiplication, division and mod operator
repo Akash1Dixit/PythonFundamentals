@@ -1,0 +1,49 @@
+# Python3 program
+# for above approach
+import math
+def Divide(a, b):
+	dividend = a;
+	divisor = b;
+
+	# Calculate sign of divisor
+	# i.e., sign will be negative
+	# only if either one of them
+	# is negative otherwise it
+	# will be positive
+
+	sign = -1 if ((dividend < 0) ^
+				(divisor < 0)) else 1;
+
+	# Remove signs of
+	# dividend and divisor
+	dividend = abs(dividend);
+	divisor = abs(divisor);
+
+	# Zero division Exception.
+	if (divisor == 0):
+		print("Cannot Divide by 0");
+
+	if (dividend == 0):
+		print(a, "/", b, "is equal to :", 0);
+
+	if (divisor == 1):
+		print(a, "/", b, "is equal to :",
+					(sign * dividend));
+
+	# Using Formula
+	# derived above.
+	print(a, "/", b, "is equal to :",
+		math.floor(sign * math.exp(math.log(dividend) -
+									math.log(divisor))));
+
+# Driver code
+a = 10;
+b = 5;
+
+Divide(a, b);
+
+a = 49;
+b = -7;
+Divide(a, b);
+
+
