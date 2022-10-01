@@ -1,0 +1,52 @@
+# Python3 implementation to Find Quotient
+# and Remainder of two integer without
+# using / and % operator using Binary search
+
+# Function to the quotient and remainder
+def find(dividend, divisor, start, end) :
+
+	# Check if start is greater than the end
+	if (start > end) :
+		return ( 0, dividend );
+
+	# Calculate mid
+	mid = start + (end - start) // 2;
+
+	n = dividend - divisor * mid;
+
+	# Check if n is greater than divisor
+	# then increment the mid by 1
+	if (n > divisor) :
+		start = mid + 1;
+
+	# Check if n is less than 0
+	# then decrement the mid by 1
+	elif (n < 0) :
+		end = mid - 1;
+
+	else :
+		# Check if n equals to divisor
+		if (n == divisor) :
+			mid += 1;
+			n = 0;
+
+		# Return the final answer
+		return ( mid, n );
+	
+	# Recursive calls
+	return find(dividend, divisor, start, end);
+
+def divide(dividend, divisor) :
+
+	return find(dividend, divisor, 1, dividend);
+
+# Driver code
+if __name__ == "__main__" :
+
+	dividend = 10; divisor = 3;
+
+	ans = divide(dividend, divisor);
+
+	print(ans[0],", ",ans[1])
+
+
