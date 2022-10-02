@@ -1,0 +1,68 @@
+# Python program
+# to count numbers
+# satisfying equation.
+
+# function that returns sum of
+# digits in a number
+def sum(n):
+
+	rem = 0
+
+	#initially sum of digits is 0
+	sum_of_digits = 0
+
+	# loop runs till all digits
+	# have been extracted
+	while (n > 0):
+	
+		# last digit from backside
+		rem = n % 10
+
+		# sums up the digits
+		sum_of_digits += rem
+
+		# the number is reduced to the
+		# number removing the last digit
+		n = n // 10
+
+	# returns the sum
+	# of digits in a number
+	return sum_of_digits
+
+# function to calculate
+# the count of
+# such occurrences
+def count(n):
+
+	# counter to calculate the occurrences
+	c = 0
+
+	# loop to traverse from n - 97 to n
+	for i in range(n - 97,n+1):
+
+		# calls the function to calculate
+		# the sum of digits of i
+		a = sum(i)
+
+		# calls the function to calculate
+		# the sum of digits of a
+		b = sum(a)
+
+		# if the summation is equal to n
+		# then increase counter by 1
+		if ((i + a + b) == n):
+			c += 1
+
+	# returns the count
+	return c
+
+# driver program to test
+# the above function
+
+n = 9939
+	
+# calls the function
+# to get the answer
+print(count(n))
+
+
