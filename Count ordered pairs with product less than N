@@ -1,0 +1,33 @@
+# Python3 implementation of above approach
+
+from math import sqrt
+# Function to return count of Ordered pairs
+# whose product are less than N
+def countOrderedPairs(N):
+	# Initialize count to 0
+	count_pairs = 0
+
+	# count total pairs
+	p = int(sqrt(N-1)) + 1
+	q = int(sqrt(N))+2
+	for i in range(1,p,1):
+		for j in range(i,q,1):
+			count_pairs += 1
+	
+	# multiply by 2 to get ordered_pairs
+	count_pairs *= 2
+
+	# subtract redundant pairs (a, b) where a==b.
+	count_pairs -= int(sqrt(N - 1))
+
+	# return answer
+	return count_pairs
+
+# Driver code
+if __name__ == '__main__':
+	N = 5
+
+	# function call to print required answer
+	print(countOrderedPairs(N))
+
+
