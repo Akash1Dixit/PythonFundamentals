@@ -1,0 +1,57 @@
+# Python3 program for the above approach
+
+# Function to find the number of
+# unique pairs
+def NumberOfRequiredPairs(arr, N) :
+
+	# Variable that with stores
+	# number of valid pairs
+	ans = 0;
+
+	# Traverse the array for every
+	# possible index i
+	for i in range(N) :
+
+		# Initialize a dummy variable
+		# for arr[i]
+		k = arr[i];
+
+		# We will loop through every
+		# multiple of arr[i];
+		# Looping through 2*N because
+		# the maximum element
+		# in array can be 2*N
+		# Please not that i and j are
+		# in 1 based indexing
+		while (k <= 2 * N) :
+
+			# Calculating j
+			j = k - i - 1;
+
+			# Now check if this j lies
+			# between the bounds
+			# of the array
+			if (j >= 1 and j <= N) :
+
+				# Checking the required
+				# condition
+				if ((arr[j - 1] == k // arr[i]) and j > i + 1) :
+					ans += 1;
+
+			# Increasing k to its next multiple
+			k += arr[i];
+
+	# Return the ans
+	return ans;
+
+# Driver Code
+if __name__ == "__main__" :
+
+	# Given Input
+	N = 5;
+	arr = [ 3, 1, 5, 9, 2 ];
+
+	# Function Call
+	print(NumberOfRequiredPairs(arr, N));
+
+	
