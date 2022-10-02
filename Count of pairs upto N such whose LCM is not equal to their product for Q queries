@@ -1,0 +1,69 @@
+# Python 3 program to find the count of pairs
+# from 1 to N such that their LCM
+# is not equal to their product
+
+N = 100005
+
+# To store Euler's Totient Function
+phi = [0 for i in range(N)]
+
+# To store prefix sum table
+pref = [0 for i in range(N)]
+
+# Compute Totients of all numbers
+# smaller than or equal to N
+def precompute():
+
+	# Make phi[1]=0 since 1 cannot form any pair
+	phi[1] = 0
+
+	# Initialise all remaining phi[] with i
+	for i in range(2, N, 1):
+		phi[i] = i
+
+	# Compute remaining phi
+	for p in range(2,N):
+		# If phi[p] is not computed already,
+		# then number p is prime
+		if (phi[p] == p):
+			# phi of prime number is p-1
+			phi[p] = p - 1
+
+			# Update phi of all multiples of p
+			for i in range(2*p, N, p):
+
+				# Add the contribution of p
+				# to its multiple i by multiplying
+				# it with (1 - 1/p)
+				phi[i] = (phi[i] // p) * (p - 1)
+
+# Function to store prefix sum table
+def prefix():
+
+	# Prefix Sum of all Euler's Totient Values
+	for i in range(1, N, 1):
+		pref[i] = pref[i - 1] + phi[i]
+
+def find_pairs(n):
+	# Total number of pairs that can be formed
+	total = (n * (n - 1)) // 2
+
+	ans = total - pref[n]
+
+	print("Number of pairs from 1 to",n,"are",ans)
+
+# Driver Code
+if __name__ == '__main__':
+	# Function call to compute all phi
+	precompute()
+
+	# Function call to store all prefix sum
+	prefix()
+
+	q = [5, 7]
+	n = len(q)
+
+	for i in range(n):
+		find_pairs(q[i])
+		
+
