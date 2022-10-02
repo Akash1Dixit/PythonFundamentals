@@ -1,0 +1,31 @@
+# Python3 program to count
+# all the possible pairs
+# with X*Y + (X + Y) equal to
+# number formed by
+# concatenating X and Y
+
+# Function for counting pairs
+def countPairs(A, B):
+
+	countY = 0
+	countX = (B - A) + 1
+	next_val = 9
+
+	# Count possible values
+	# of Y
+	while (next_val <= B):
+		if (next_val >= A):
+			countY += 1
+		next_val = next_val * 10 + 9
+
+	return (countX * countY)
+
+# Driver Code
+if __name__ == '__main__':
+	
+	A = 1
+	B = 16
+	
+	print(countPairs(A, B))
+
+
