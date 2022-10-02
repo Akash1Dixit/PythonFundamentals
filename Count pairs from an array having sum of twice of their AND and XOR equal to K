@@ -1,0 +1,38 @@
+# Python3 program for the above approach
+from collections import defaultdict
+
+# Function to count number of pairs
+# satisfying the given conditions
+def countPairs(arr, N, K) :
+	
+	# Stores the frequency of array elements
+	mp = defaultdict(int)
+
+	# Stores the total number of pairs
+	cnt = 0
+
+	# Traverse the array
+	for i in range(N):
+
+		# Add it to cnt
+		cnt += mp[K - arr[i]]
+
+		# Update frequency of
+		# current array element
+		mp[arr[i]] += 1
+	
+	# Print the count
+	print(cnt)
+
+# Driver Code
+# Given array
+arr = [ 1, 5, 4, 8, 7 ]
+
+# Size of the array
+N = len(arr)
+
+# Given value of K
+K = 9
+countPairs(arr, N, K)
+
+
