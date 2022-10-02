@@ -1,0 +1,26 @@
+# Python3 implementation of the approach
+import math
+
+# Function to calculate the required LCM sum
+def lcmSum(n):
+
+	Sum = 0
+	for i in range(1, n + 1):
+
+		# GCD of i and n
+		gcd = math.gcd(i, n)
+
+		# LCM of i and n i.e. (i * n) / gcd(i, n)
+		lcm = (i * n) // gcd
+
+		# Update sum
+		Sum = Sum + lcm
+
+	return Sum
+
+# Driver code
+if __name__ == "__main__":
+
+	n = 3
+	print(lcmSum(n))
+
