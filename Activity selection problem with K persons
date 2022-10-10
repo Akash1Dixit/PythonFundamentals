@@ -1,0 +1,80 @@
+# Python3 program for the above approach
+from bisect import bisect_left
+
+# Function to find maximum shops
+# that can be visited by K persons
+def maximumShops(opening, closing, n, k):
+
+	# Store opening and closing
+	# time of shops
+	a = [[0, 0] for i in range(n)]
+
+	for i in range(n):
+		a[i][0] = opening[i]
+		a[i][1] = closing[i]
+
+	# Sort the pair of array
+	a = sorted(a)
+
+	# Stores the result
+	count = 1
+
+	# Stores current number of persons visiting
+	# some shop with their ending time
+	st = {}
+	for i in range(n):
+
+		# Check if current shop can be
+		# assigned to a person who's
+		# already visiting any other shop
+		flag = False
+
+		if (len(st) == 0):
+			ar = list(st.keys())
+
+			it = bisect_left(ar, a[i][0])
+
+			if (it != 0):
+				it -= 1
+
+				# Checks if there is any person whose
+				# closing time <= current shop opening
+				# time
+				if (ar[it] <= a[i][0]):
+
+					# Erase previous shop visited by the
+					# person satisfying the condition
+					del st[it]
+
+					# Insert new closing time of current
+					# shop for the person satisfying ṭhe
+					# condition
+					st[a[i][1]] = 1
+
+					# Increment the count by one
+					count += 1
+					flag = True
+
+		# In case if no person have closing
+		# time <= current shop opening time
+		# but there are some persons left
+		if (len(st) < k and flag == False):
+			st[a[i][1]] = 1
+			count += 1
+			
+	# Finally pr the ans
+	return count
+
+# Driver Code
+if __name__ == '__main__':
+
+	# Given starting and ending time
+	S = [1, 8, 3, 2, 6]
+	E = [5, 10, 6, 5, 9]
+
+	# Given K and N
+	K,N = 2, len(S)
+
+	# Function call
+	print (maximumShops(S, E, N, K))
+
